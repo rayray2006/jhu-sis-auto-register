@@ -85,11 +85,20 @@ From the repo folder:
 python sis_register.py
 ```
 
-The script will prompt you for:
+The script asks for your **JHU email** and **password** unless it finds them in the `SIS_EMAIL` / `SIS_PASSWORD`
+environment variables or in `sis_credentials.py` (copy `sis_credentials.example.py`; it's gitignored, so it
+never gets committed). Registration time defaults to 07:00; change it with `--time HH:MM`.
 
-- 📧 **JHU email**
-- 🔑 **Password**
-- ⏰ **Registration time** (24-hour format, e.g., `07:00` for 7AM)
+### Single-click alternative (manual login)
+SIS's Cloudflare check blocks automated Chrome windows. `manual_click_register.py` lets you log in yourself in
+your normal browser, records where the Register button is on screen, and clicks it once at exactly the
+registration time (clock-corrected with `sntp`). No dependencies beyond Python 3:
+```bash
+python3 manual_click_register.py --practice   # rehearse on a local test page
+python3 manual_click_register.py --dry-run    # moves the mouse there at 7:00 but never clicks
+python3 manual_click_register.py              # real run, clicks at 07:00
+```
+It needs Terminal to be allowed under System Settings > Privacy & Security > Accessibility.
 
 > The bot logs in **10 minutes before** the registration time and waits.
 

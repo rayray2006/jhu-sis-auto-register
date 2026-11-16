@@ -3,3 +3,6 @@ __pycache__/
 *.png
 .vscode/
 .env
+sis_credentials.py
+sis-bot-venv/
+.DS_Store
